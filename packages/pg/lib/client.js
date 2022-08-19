@@ -393,6 +393,10 @@ class Client extends EventEmitter {
       database: params.database,
     }
 
+    if (params.client_encoding) {
+      data.client_encoding = params.client_encoding
+    }
+
     var appName = params.application_name || params.fallback_application_name
     if (appName) {
       data.application_name = appName

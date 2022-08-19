@@ -13,3 +13,14 @@ suite.test('it sends options', async () => {
   assert.strictEqual(rows[0].default_transaction_isolation, 'serializable')
   await client.end()
 })
+
+suite.test('it sends client_encoding', async () => {
+  const client = new Client({
+    client_encoding: 'sql_ascii',
+  })
+  await client.connect()
+  const { rows } = await client.query('SHOW client_encoding')
+  assert.strictEqual(rows.length, 1)
+  assert.strictEqual(rows[0].client_encoding, 'SQL_ASCII')
+  await client.end()
+})
